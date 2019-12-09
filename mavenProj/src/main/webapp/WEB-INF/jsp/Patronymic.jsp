@@ -3,7 +3,7 @@
 <body>
 
 <form action="result" method="get">
-    <label>Enter your patronymic</label>
+    <label>Enter your pjjjatronymic</label>
     <input name="patronymic">
     <button>Send</button>
 </form>

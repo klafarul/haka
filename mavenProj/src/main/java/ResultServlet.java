@@ -1,5 +1,6 @@
 import person.Person;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +15,17 @@ public class ResultServlet extends HttpServlet {
         HttpSession session = req.getSession();
         person = (Person) session.getAttribute("person");
         person.setPatronymic(req.getParameter("patronymic"));
+
+
         req.setAttribute("person", person);
-        req.getRequestDispatcher("WEB-INF/jsp/Result.jsp").forward(req, resp);
+        req.setAttribute("name",   person.getName());
+
+
+        ServletContext context = this.getServletContext();
+        context.setAttribute("name", person.getName());
+
+
+        getServletContext().getRequestDispatcher("/WEB-INF/jsp/Result.jsp").forward(req, resp);
 
     }
 }
