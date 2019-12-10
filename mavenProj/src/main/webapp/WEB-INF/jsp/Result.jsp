@@ -8,6 +8,6 @@
 </head>
 
 <body>
-    <h3>Hello, <c:out  value="${person.surname}" default="213"/>45 <c:out value="${person.name}"/>  <c:out value="${person.patronymic}"/>
+<h3>Hello, <c:out  value="${person.surname}" default="213"/>45 <c:out value="${person.name}"/>  <c:out value="${person.patronymic}"/>
 </body>
 </html>

@@ -19,10 +19,7 @@ public class ResultServlet extends HttpServlet {
         person = (Person) session.getAttribute("person");
         person.setPatronymic(req.getParameter("patronymic"));
 
-
         req.setAttribute("person", person);
-
-
 
         getServletContext().getRequestDispatcher("/WEB-INF/jsp/Result.jsp").forward(req, resp);
 
