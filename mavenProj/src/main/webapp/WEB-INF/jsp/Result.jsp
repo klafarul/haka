@@ -8,6 +8,6 @@
 </head>
 
 <body>
-    <h3>Hello, <c:out  value="${person.getName()}" default="213"/> <c:out value="${person.getSurname()}"/>  <c:out value="${person.getPatronymic()}"/>
+    <h3>Hello, <c:out  value="${person.surname}" default="213"/>45 <c:out value="${person.name}"/>  <c:out value="${person.patronymic}"/>
 </body>
 </html>

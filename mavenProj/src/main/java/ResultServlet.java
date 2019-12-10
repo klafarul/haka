@@ -2,12 +2,15 @@ import person.Person;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+
+@WebServlet("/result")
 public class ResultServlet extends HttpServlet {
     Person person;
     @Override
@@ -18,11 +21,7 @@ public class ResultServlet extends HttpServlet {
 
 
         req.setAttribute("person", person);
-        req.setAttribute("name",   person.getName());
 
-
-        ServletContext context = this.getServletContext();
-        context.setAttribute("name", person.getName());
 
 
         getServletContext().getRequestDispatcher("/WEB-INF/jsp/Result.jsp").forward(req, resp);
