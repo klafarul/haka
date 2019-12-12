@@ -18,6 +18,8 @@ import java.util.Enumeration;
 
 @WebFilter("/*")
 public class CommonFilter implements Filter {
+
+
     ServletContext context;
    String s;
     public void init(FilterConfig filterConfig) throws ServletException {

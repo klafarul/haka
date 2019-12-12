@@ -16,4 +16,6 @@ public class NameServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("WEB-INF/jsp/Name.jsp").forward(req, resp);
     }
+
+
 }
