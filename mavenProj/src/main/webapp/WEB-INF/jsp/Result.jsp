@@ -11,7 +11,6 @@
 
 
 <body>
-
     <%
         ArrayList<Person> persons = (ArrayList<Person>) request.getAttribute("persons");
         PrintWriter pw = response.getWriter();
@@ -22,7 +21,7 @@
             pw.write("<br>");
         }
         pw.write("ALLGOOd");
-       // pw.write(((int) request.getAttribute("count")).getName());
+        pw.write(persons.size()+"");
     %>
 </body>
 </html>
