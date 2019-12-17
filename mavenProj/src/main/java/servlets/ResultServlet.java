@@ -1,4 +1,8 @@
-import person.Pers;
+package servlets;
+
+import person.Person;
+import person.PersonEntity;
+import services.HibService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,21 +18,21 @@ import java.util.ArrayList;
 public class ResultServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Pers pers;
-        ArrayList<Pers> perss;
+        Person person;
+        ArrayList<Person> persons;
 
         HttpSession session = req.getSession();
-        pers = (Pers) session.getAttribute("person");
-        pers.setPatronymic(req.getParameter("patronymic"));
+        person = (Person) session.getAttribute("person");
+        person.setPatronymic(req.getParameter("patronymic"));
 
         //Person is ready to push in DB
         HibService hibService = new HibService();
-        hibService.savePerson(pers);
-        perss = (ArrayList<Pers>) hibService.findAllPersons();
+        hibService.savePerson(person);
+        persons = (ArrayList<Person>) hibService.findAllPersons();
 
 
-        req.setAttribute("person", pers);
-        req.setAttribute("persons", perss);
+        req.setAttribute("person", person);
+        req.setAttribute("persons", persons);
 
         getServletContext().getRequestDispatcher("/WEB-INF/jsp/Result.jsp").forward(req, resp);
 

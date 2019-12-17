@@ -3,7 +3,8 @@
 
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="person.Pers" %>
+<%@ page import="person.PersonEntity" %>
+<%@ page import="person.Person" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -13,16 +14,15 @@
 
 <body>
     <%
-
-        ArrayList<Pers> persons = (ArrayList<Pers>) request.getAttribute("persons");
+        ArrayList<Person> people = (ArrayList<Person>) request.getAttribute("persons");
         PrintWriter pw = response.getWriter();
-        for (int i = 0; i < persons.size(); i++){
-            pw.write(persons.get(i).getName() );
-            pw.write(persons.get(i).getSurname());
-            pw.write(persons.get(i).getPatronymic());
+        for (int i = 0; i < people.size(); i++){
+            pw.write(people.get(i).getName() );
+            pw.write(people.get(i).getSurname());
+            pw.write(people.get(i).getPatronymic());
             pw.write("<br>");
         }
-        pw.write("ALLGOOd");
+        pw.write("ALL GoOd!!!");
 
 
     %>

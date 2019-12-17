@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "person")
-public class Pers {
+public class PersonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,16 +18,18 @@ public class Pers {
     @Column(name = "PATRONYMIC")
     private String patronymic;
 
-    public int getId(){
-        return id;
+
+
+    public PersonEntity(){
     }
 
-    public Pers(){
+    public PersonEntity(Person person){
+        this.name = person.getName();
+        this.surname = person.getSurname();
+        this.patronymic = person.getPatronymic();
     }
-    public Pers(String name, String surname, String patronymic){
-        this.name = name;
-        this.surname = surname;
-        this.patronymic = patronymic;
+    public int getId(){
+        return id;
     }
 
     public String getName() {
@@ -52,5 +54,13 @@ public class Pers {
 
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
+    }
+    public Person toPerson(){
+        Person person = new Person();
+        person.setName(this.getName());
+        person.setSurname(this.getSurname());
+        person.setPatronymic(this.getPatronymic());
+        return person;
+
     }
 }

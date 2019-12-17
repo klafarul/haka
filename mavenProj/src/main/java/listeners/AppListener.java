@@ -1,11 +1,9 @@
-package Listeners;
+package listeners;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import javax.servlet.http.HttpSessionActivationListener;
-import javax.servlet.http.HttpSessionEvent;
 
 @WebListener
 public class AppListener implements ServletContextListener {

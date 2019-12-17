@@ -1,4 +1,4 @@
-package Filters.Copier;
+package filters.Copier;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.WriteListener;
