@@ -1,9 +1,34 @@
 package person;
 
-public class Person {
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "person")
+public class Pers {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    private int id;
+    @Column(name = "NAME")
     private String name;
+    @Column(name = "SURNAME")
     private String surname;
+    @Column(name = "PATRONYMIC")
     private String patronymic;
+
+    public int getId(){
+        return id;
+    }
+
+    public Pers(){
+    }
+    public Pers(String name, String surname, String patronymic){
+        this.name = name;
+        this.surname = surname;
+        this.patronymic = patronymic;
+    }
 
     public String getName() {
         return name;

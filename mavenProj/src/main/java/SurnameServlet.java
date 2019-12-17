@@ -1,4 +1,4 @@
-import person.Person;
+import person.Pers;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,13 +10,13 @@ import java.io.IOException;
 
 @WebServlet("/surname")
 public class SurnameServlet extends HttpServlet {
-    Person person;
+    Pers pers;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        person = new Person();
-        person.setName(req.getParameter("name"));
-        session.setAttribute("person", person);
+        pers = new Pers();
+        pers.setName(req.getParameter("name"));
+        session.setAttribute("person", pers);
         req.getRequestDispatcher("WEB-INF/jsp/Surname.jsp").forward(req, resp);
     }
 }

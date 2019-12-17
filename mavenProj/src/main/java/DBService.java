@@ -1,4 +1,4 @@
-import person.Person;
+import person.Pers;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ public final class DBService {
     private Connection connection;
 
     private DBService(){
+
 
         try{
              Class.forName("org.postgresql.Driver");
@@ -27,9 +28,9 @@ public final class DBService {
         }
         return instance;
     }
-    
 
-    public ResultSet sqlQuery(String query){
+
+    private ResultSet sqlQuery(String query){
         ResultSet resultSet = null;
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -40,14 +41,14 @@ public final class DBService {
         return resultSet;
     }
 
-    public void insertRaw(Person person){
+    public void insertRaw(Pers pers){
 
         String sqlQP = "INSERT INTO PERSON(ID, NAME, SURNAME, PATRONYMIC) VALUES (nextval('i'),?,?,?);";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQP);
-            preparedStatement.setString(1, person.getName());
-            preparedStatement.setString(2, person.getSurname());
-            preparedStatement.setString(3, person.getPatronymic());
+            preparedStatement.setString(1, pers.getName());
+            preparedStatement.setString(2, pers.getSurname());
+            preparedStatement.setString(3, pers.getPatronymic());
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -55,21 +56,21 @@ public final class DBService {
         catch (SQLException e){}
     }
 
-    public ArrayList<Person> getAllRaws(){
-        ArrayList<Person> persons = new ArrayList<Person>();
-        Person person;
+    public ArrayList<Pers> getAllRaws(){
+        ArrayList<Pers> perss = new ArrayList<Pers>();
+        Pers pers;
         try{
             ResultSet resultSet = sqlQuery("SELECT * FROM PERSON;");
             while (resultSet.next()){
-                person = new Person();
-                person.setName(resultSet.getString("NAME"));
-                person.setSurname(resultSet.getString("SURNAME"));
-                person.setPatronymic(resultSet.getString("PATRONYMIC"));
-                persons.add(person);
+                pers = new Pers();
+                pers.setName(resultSet.getString("NAME"));
+                pers.setSurname(resultSet.getString("SURNAME"));
+                pers.setPatronymic(resultSet.getString("PATRONYMIC"));
+                perss.add(pers);
             }
             resultSet.close();
         }
         catch (SQLException ex){}
-        return persons;
+        return perss;
     }
 }

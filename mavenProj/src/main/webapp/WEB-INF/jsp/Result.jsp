@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="person.Person" %>
+
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="person.Pers" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -12,7 +13,8 @@
 
 <body>
     <%
-        ArrayList<Person> persons = (ArrayList<Person>) request.getAttribute("persons");
+
+        ArrayList<Pers> persons = (ArrayList<Pers>) request.getAttribute("persons");
         PrintWriter pw = response.getWriter();
         for (int i = 0; i < persons.size(); i++){
             pw.write(persons.get(i).getName() );
@@ -21,7 +23,8 @@
             pw.write("<br>");
         }
         pw.write("ALLGOOd");
-        pw.write(persons.size()+"");
+
+
     %>
 </body>
 </html>

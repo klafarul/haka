@@ -1,5 +1,5 @@
 
-import person.Person;
+import person.Pers;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,13 +12,13 @@ import java.io.IOException;
 
 @WebServlet("/patronymic")
 public class PatronymicServlet extends HttpServlet {
-    Person person;
+    Pers pers;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        person = (Person) session.getAttribute("person");
-        person.setSurname(req.getParameter("surname"));
-        session.setAttribute("person", person);
+        pers = (Pers) session.getAttribute("person");
+        pers.setSurname(req.getParameter("surname"));
+        session.setAttribute("person", pers);
 
         req.getRequestDispatcher("WEB-INF/jsp/Patronymic.jsp").forward(req, resp);
     }
