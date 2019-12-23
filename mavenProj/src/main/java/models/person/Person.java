@@ -1,7 +1,7 @@
-package person;
+package models.person;
 
 
-import javax.persistence.*;
+import models.address.Address;
 
 public class Person {
 
@@ -12,8 +12,10 @@ public class Person {
 
     private String patronymic;
 
+    private Address address;
     public Person(){
     }
+
 
     public Person(String name, String surname, String patronymic){
         this.name = name;
@@ -43,5 +45,17 @@ public class Person {
 
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
+    }
+
+    public Address getAddress() { return address;}
+
+    public void setAddress(Address address) { this.address = address; }
+
+    @Override
+    public String toString() {
+        return "\nPerson:\n" +
+                "name= " + name + "\n" +
+                "surname= " + surname + '\n' +
+                "patronymic= " + patronymic + '\n';
     }
 }

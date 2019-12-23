@@ -1,5 +1,9 @@
-package person;
+package models.person;
 
+
+import models.address.Address;
+import models.address.AddressEntity;
+import services.HibService;
 
 import javax.persistence.*;
 
@@ -18,19 +22,34 @@ public class PersonEntity {
     @Column(name = "PATRONYMIC")
     private String patronymic;
 
+    @ManyToOne
+    @JoinColumn(name = "ad_id")
+    private AddressEntity addressEntity;
 
-
-    public PersonEntity(){
-    }
+    public PersonEntity(){}
 
     public PersonEntity(Person person){
+        HibService hibService = HibService.getHibService();
         this.name = person.getName();
         this.surname = person.getSurname();
         this.patronymic = person.getPatronymic();
+        this.addressEntity = hibService.findByAddress(person.getAddress());
     }
+
+    public AddressEntity getAddressEntity() {
+        return addressEntity;
+    }
+
+    public void setAddressEntity(AddressEntity addressEntity) {
+        this.addressEntity = addressEntity;
+    }
+
     public int getId(){
         return id;
     }
+    public void setId(int id){
+        this.id = id;
+     }
 
     public String getName() {
         return name;
@@ -61,6 +80,6 @@ public class PersonEntity {
         person.setSurname(this.getSurname());
         person.setPatronymic(this.getPatronymic());
         return person;
-
     }
+
 }

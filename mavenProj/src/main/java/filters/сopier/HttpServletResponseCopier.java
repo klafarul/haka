@@ -1,4 +1,4 @@
-package filters.Copier;
+package filters.сopier;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;

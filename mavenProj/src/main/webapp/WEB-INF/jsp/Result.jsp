@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="person.PersonEntity" %>
-<%@ page import="person.Person" %>
-<html>
+
 <head>
     <meta charset="UTF-8">
     <title>Result</title>
@@ -13,18 +9,16 @@
 
 
 <body>
-    <%
-        ArrayList<Person> people = (ArrayList<Person>) request.getAttribute("persons");
-        PrintWriter pw = response.getWriter();
-        for (int i = 0; i < people.size(); i++){
-            pw.write(people.get(i).getName() );
-            pw.write(people.get(i).getSurname());
-            pw.write(people.get(i).getPatronymic());
-            pw.write("<br>");
-        }
-        pw.write("ALL GoOd!!!");
+<form action="result" method="get">
+    <button>Show Addresses</button>
 
 
-    %>
+    <c:forEach items="${addresses}" var="address">
+            ${address.toString()}<br>
+            <c:forEach items="${address.getPersons()}" var="person">
+                    ${person.toString()}<br>
+            </c:forEach>
+    </c:forEach>
+</form>
 </body>
 </html>

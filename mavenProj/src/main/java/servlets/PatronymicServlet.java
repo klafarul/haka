@@ -1,7 +1,6 @@
 package servlets;
 
-import person.Person;
-import person.PersonEntity;
+import models.person.Person;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
