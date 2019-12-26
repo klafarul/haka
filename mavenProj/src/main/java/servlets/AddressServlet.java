@@ -1,6 +1,8 @@
 package servlets;
 
 import models.address.Address;
+import models.address.AddressEntity;
+import services.AddressRepository;
 import services.HibService;
 
 import javax.servlet.ServletException;
@@ -20,8 +22,7 @@ public class AddressServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HibService hibService = HibService.getHibService();
-        ArrayList<Address> list = (ArrayList<Address>) hibService.findAllAddresses();
-
+        ArrayList<Address> list =  hibService.findAllAddresses();
 
 
         req.setAttribute("list", list);
@@ -30,7 +31,7 @@ public class AddressServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HibService hibService = HibService.getHibService();
+
 
         Address address = new Address();
 
@@ -38,9 +39,9 @@ public class AddressServlet extends HttpServlet {
         address.setHouse(Integer.parseInt(req.getParameter("house")));
         address.setApartment(Integer.parseInt(req.getParameter("apartment")));
 
-        if (!hibService.inDB(address)){
-            hibService.saveAddress(address);
-        }
+        HibService hibService = HibService.getHibService();
+        hibService.saveAddress(address);
+
         req.getRequestDispatcher("WEB-INF/jsp/Address.jsp").forward(req, resp);
     }
 }

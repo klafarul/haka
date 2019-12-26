@@ -2,7 +2,7 @@
 <body>
 <h2>Hello World!</h2>
 
-<form action="name">
+<form action="index">
     <button>Start</button>
 </form>
 </body>

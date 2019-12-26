@@ -9,15 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-@WebServlet("/name")
-public class NameServlet extends HttpServlet {
+@WebServlet("/index")
+public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ArrayList<String> list = new ArrayList<>();
-        list.add("first");
-        list.add("second");
-        list.add("third");
-        list.add("fourth");
 
         req.getRequestDispatcher("WEB-INF/jsp/Address.jsp").forward(req, resp);
     }

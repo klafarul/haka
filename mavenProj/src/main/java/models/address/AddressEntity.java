@@ -2,6 +2,7 @@ package models.address;
 
 import models.person.Person;
 import models.person.PersonEntity;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "addresses")
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class AddressEntity {
 
     @Id
@@ -23,6 +25,7 @@ public class AddressEntity {
     private int apartment;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressEntity")
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private List<PersonEntity> persons;
 
     public AddressEntity(){
@@ -44,9 +47,7 @@ public class AddressEntity {
         persons.add(personEntity);
     }
 
-    public void removeAuto(Person auto) {
-        persons.remove(auto);
-    }
+
 
     public List<PersonEntity> getPersons() {
         return persons;
@@ -85,9 +86,10 @@ public class AddressEntity {
         address.setCity(this.getCity());
         address.setHouse(this.getHouse());
         address.setApartment(this.getApartment());
+
         List<Person> personList = new ArrayList<>();
-        for (int i = 0; i <this.persons.size(); i++){
-            personList.add(this.persons.get(i).toPerson());
+        for (int i = 0; i <this.getPersons().size(); i++){
+            personList.add(this.getPersons().get(i).toPerson());
         }
         address.setPersons(personList);
         return address;

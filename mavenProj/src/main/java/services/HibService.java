@@ -1,19 +1,16 @@
 package services;
 
-import hibernateUtil.HibernateSessionFactoryUtil;
+
 import models.address.Address;
 import models.address.AddressEntity;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import models.person.Person;
 import models.person.PersonEntity;
-import org.hibernate.query.Query;
-
+import org.hibernate.service.Service;
 import java.util.ArrayList;
-import java.util.List;
 
-//ПРЕОБРАЗУЮ ПЕРСОН В ПЕРСОНЭНТИТИ И ОБРАТНО
-public class HibService {
+
+
+public class HibService implements Service {
     private static HibService hibService;
 
     private HibService(){
@@ -25,94 +22,50 @@ public class HibService {
         }
         return hibService;
     }
-    public Person findById(int id){
-        PersonEntity personEntity = HibernateSessionFactoryUtil.getSessionFactory().openSession().get(PersonEntity.class, id);
-        Person person = personEntity.toPerson();
-        return person;
-    }
-
-    public List<Person> findAllPersons(){
-        ArrayList<PersonEntity> personsEntity = (ArrayList<PersonEntity>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("FROM PersonEntity").list();
-
-        List<Person> persons = new ArrayList<>();
-
-        for (int i = 0; i <personsEntity.size(); i++){
-            persons.add(personsEntity.get(i).toPerson());
-        }
-        return persons;
-    }
-
+    //+++++
     public void savePerson(Person person){
         PersonEntity personEntity = new PersonEntity(person);
-
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(personEntity);
-        tx.commit();
-        session.close();
-    }
-    public AddressEntity findByAddress(Address address){
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-
-        String hql = "FROM AddressEntity AE WHERE (AE.city=:city) AND (AE.house=:house) AND (AE.apartment=:apartment)";
-        Query query = session.createQuery(hql);
-        query.setParameter("city", (String)address.getCity());
-        query.setParameter("house", address.getHouse());
-        query.setParameter("apartment", address.getApartment());
-
-        ArrayList<AddressEntity> addressEntities = (ArrayList<AddressEntity>) query.list();
-        if (addressEntities.size() == 1){
-            return addressEntities.get(0);
-        }
-        return null;
+        PersonRepository personRepository = new PersonRepository();
+        personRepository.save(personEntity);
     }
 
-
+    //+++++
     public void saveAddress(Address address){
         AddressEntity addressEntity = new AddressEntity(address);
+        AddressRepository addressRepository = new AddressRepository();
 
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(addressEntity);
-        tx.commit();
-        session.close();
+        if (addressRepository.find(addressEntity) == null) {
+            addressRepository.save(addressEntity);
+        }
     }
 
+    //++--
     public void updateAddress(Address address){
-
-
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        AddressRepository addressRepository = new AddressRepository();
 
         AddressEntity addressEntity = findByAddress(address);
         PersonEntity personEntity = new PersonEntity(address.getPersons().get(address.getPersons().size()-1));
-
-        addressEntity.addPerson(personEntity);
-        Transaction tx = session.beginTransaction();
-        session.merge(addressEntity);
-        tx.commit();
-        session.close();
-    }
-
-
-    public boolean inDB(Address address) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        String hql = "FROM AddressEntity AE WHERE (AE.city=:city) AND (AE.house=:house) AND (AE.apartment=:apartment)";
-        Query query = session.createQuery(hql);
-        query.setParameter("city", (String)address.getCity());
-        query.setParameter("house", address.getHouse());
-        query.setParameter("apartment", address.getApartment());
-
-        ArrayList<AddressEntity> addressEntities = (ArrayList<AddressEntity>) query.list();
-        if (addressEntities.size() == 0){
-            return false;
-        }
-        return true;
+        addressRepository.update(addressEntity, personEntity);
 
     }
-    public List<Address> findAllAddresses(){
-        ArrayList<AddressEntity> adressesEntity = (ArrayList<AddressEntity>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("FROM AddressEntity").list();
+    //+++++
+    public AddressEntity findByAddress(Address address) {
+        AddressEntity addressEntity = new AddressEntity();
+        addressEntity.setCity(address.getCity());
+        addressEntity.setHouse(address.getHouse());
+        addressEntity.setApartment(address.getApartment());
 
-        List<Address> addresses = new ArrayList<>();
+        AddressRepository addressRepository = new AddressRepository();
+
+        return addressRepository.find(addressEntity);
+    }
+
+    //+++++
+    public ArrayList<Address> findAllAddresses(){
+        AddressRepository addressRepository = new AddressRepository();
+
+        ArrayList<AddressEntity> adressesEntity = addressRepository.findAll();
+        ArrayList<Address> addresses= new ArrayList<>();
 
         for (int i = 0; i <adressesEntity.size(); i++){
             addresses.add(adressesEntity.get(i).toAddress());

@@ -11,6 +11,7 @@
 <body>
 <form action="result" method="get">
     <button>Show Addresses</button>
+    <br>
 
 
     <c:forEach items="${addresses}" var="address">

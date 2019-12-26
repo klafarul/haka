@@ -3,12 +3,15 @@ package models.person;
 
 import models.address.Address;
 import models.address.AddressEntity;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import services.HibService;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
 @Entity
 @Table(name = "person")
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class PersonEntity {
 
     @Id
@@ -22,7 +25,7 @@ public class PersonEntity {
     @Column(name = "PATRONYMIC")
     private String patronymic;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ad_id")
     private AddressEntity addressEntity;
 

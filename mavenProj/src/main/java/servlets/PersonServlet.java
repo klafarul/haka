@@ -1,9 +1,11 @@
 package servlets;
 
+import hibernateUtil.HibernateSessionFactoryUtil;
 import models.address.Address;
 import models.address.AddressEntity;
 import models.person.Person;
 import models.person.PersonEntity;
+import services.AddressRepository;
 import services.HibService;
 
 import javax.servlet.ServletException;
@@ -48,6 +50,8 @@ public class PersonServlet extends HttpServlet {
         ArrayList<Address> addresses;
         addresses = (ArrayList<Address>) hibService.findAllAddresses();
         req.setAttribute("list", addresses);
+
+
 
         req.getRequestDispatcher("WEB-INF/jsp/Person.jsp").forward(req, resp);
 

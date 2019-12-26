@@ -10,6 +10,8 @@ public class Address {
     private int house;
     private int apartment;
     private List<Person> persons;
+    private int id;
+
 
     public Address(){
         persons = new ArrayList<>();
@@ -29,6 +31,14 @@ public class Address {
         if (!persons.contains(person)) {
             persons.add(person);
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCity() {

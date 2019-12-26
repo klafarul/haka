@@ -18,7 +18,7 @@ public class ResultServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HibService hibService = HibService.getHibService();
-        ArrayList<Address> addresses = (ArrayList<Address>) hibService.findAllAddresses();
+        ArrayList<Address> addresses = hibService.findAllAddresses();
 
         req.setAttribute("addresses", addresses);
 
