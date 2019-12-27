@@ -1,7 +1,6 @@
 package services;
 
 import hibernateUtil.HibernateSessionFactoryUtil;
-import models.address.Address;
 import models.address.AddressEntity;
 import models.person.PersonEntity;
 import org.hibernate.Session;
