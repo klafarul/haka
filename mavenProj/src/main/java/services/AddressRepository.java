@@ -2,19 +2,20 @@ package services;
 
 import hibernateUtil.HibernateSessionFactoryUtil;
 import models.address.AddressEntity;
+import models.person.Person;
 import models.person.PersonEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
-
+@Component
 public class AddressRepository {
 
-    public AddressRepository(){
-
-    }
     public void save(AddressEntity addressEntity){
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
@@ -53,7 +54,7 @@ public class AddressRepository {
 
     public ArrayList<AddressEntity> findAll(){
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        ArrayList<AddressEntity> addressesEntity = (ArrayList<AddressEntity>) session.createQuery("select distinct AE FROM AddressEntity AE right JOIN fetch AE.persons", AddressEntity.class).list();
+        ArrayList<AddressEntity> addressesEntity = (ArrayList<AddressEntity>) session.createQuery("select distinct  AE FROM AddressEntity AE left JOIN fetch AE.persons order by AE.city", AddressEntity.class).list();
         System.out.println("LOOOOOK HERE: " + addressesEntity.size());
         session.close();
         return addressesEntity;

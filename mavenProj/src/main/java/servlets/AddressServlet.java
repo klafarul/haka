@@ -1,8 +1,7 @@
 package servlets;
 
 import models.address.Address;
-import models.address.AddressEntity;
-import services.AddressRepository;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import services.HibService;
 
 import javax.servlet.ServletException;
@@ -20,12 +19,15 @@ public class AddressServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("WEB-INF/applicationContextMVC.xml");
+        HibService hibService = context.getBean("hibService", HibService.class);
 
-        HibService hibService = HibService.getHibService();
+        //HibService hibService = HibService.getHibService();
         ArrayList<Address> list =  hibService.findAllAddresses();
 
 
         req.setAttribute("list", list);
+        context.close();
         req.getRequestDispatcher("WEB-INF/jsp/Person.jsp").forward(req, resp);
     }
 
@@ -39,9 +41,11 @@ public class AddressServlet extends HttpServlet {
         address.setHouse(Integer.parseInt(req.getParameter("house")));
         address.setApartment(Integer.parseInt(req.getParameter("apartment")));
 
-        HibService hibService = HibService.getHibService();
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("WEB-INF/applicationContextMVC.xml");
+        HibService hibService = context.getBean("hibService", HibService.class);
+        //HibService hibService = HibService.getHibService();
         hibService.saveAddress(address);
-
+        context.close();
         req.getRequestDispatcher("WEB-INF/jsp/Address.jsp").forward(req, resp);
     }
 }

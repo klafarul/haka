@@ -1,11 +1,8 @@
 package servlets;
 
-import hibernateUtil.HibernateSessionFactoryUtil;
 import models.address.Address;
-import models.address.AddressEntity;
 import models.person.Person;
-import models.person.PersonEntity;
-import services.AddressRepository;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import services.HibService;
 
 import javax.servlet.ServletException;
@@ -27,7 +24,9 @@ public class PersonServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HibService hibService = HibService.getHibService();
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("WEB-INF/applicationContextMVC.xml");
+        HibService hibService = context.getBean("hibService", HibService.class);
+        //HibService hibService = HibService.getHibService();
         Person person = new Person();
         Address address = new Address();
 
@@ -52,7 +51,7 @@ public class PersonServlet extends HttpServlet {
         req.setAttribute("list", addresses);
 
 
-
+        context.close();
         req.getRequestDispatcher("WEB-INF/jsp/Person.jsp").forward(req, resp);
 
     }

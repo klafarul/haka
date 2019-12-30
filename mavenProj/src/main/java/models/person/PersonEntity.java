@@ -1,13 +1,12 @@
 package models.person;
 
 
-import models.address.Address;
 import models.address.AddressEntity;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import services.HibService;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 
 @Entity
 @Table(name = "person")
@@ -32,11 +31,15 @@ public class PersonEntity {
     public PersonEntity(){}
 
     public PersonEntity(Person person){
-        HibService hibService = HibService.getHibService();
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        HibService hibService = context.getBean("hib", HibService.class);
+        //HibService hibService = HibService.getHibService();
+
         this.name = person.getName();
         this.surname = person.getSurname();
         this.patronymic = person.getPatronymic();
         this.addressEntity = hibService.findByAddress(person.getAddress());
+        context.close();
     }
 
     public AddressEntity getAddressEntity() {

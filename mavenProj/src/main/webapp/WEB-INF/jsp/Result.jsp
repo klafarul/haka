@@ -9,7 +9,7 @@
 
 
 <body>
-<form action="result" method="get">
+<form action="res" method="get">
     <button>Show Addresses</button>
     <br>
 

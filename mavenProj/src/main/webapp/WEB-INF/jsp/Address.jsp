@@ -1,7 +1,7 @@
-<%@ page import="java.io.PrintWriter" %>
+
 <html>
 <body>
-<form action="address" method="post">
+<form action="addr" method="post">
     <label>Enter your City</label>
     <input name="city">
     <br>
@@ -19,7 +19,7 @@
 
     <button type="submit">Add</button>
 </form>
-<form action="address" method="get">
+<form action="addr" method="get">
     <button>continue</button>
 </form>
 </body>
