@@ -8,5 +8,14 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <context:component-scan base-package="services"/>
+    <context:component-scan base-package="services" />
+
+
+    <bean id ="sessionFactory"
+          class="hibernateUtil.HibernateSessionFactoryUtil"
+          init-method="doInit"
+          factory-method="getFactory">
+    </bean>
+
+
 </beans>

@@ -1,4 +1,4 @@
-package repositories;
+package services.repositories;
 
 import hibernateUtil.HibernateSessionFactoryUtil;
 import models.address.AddressEntity;
@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 @Component
 public class AddressRepository {
+
+
 
     public void save(AddressEntity addressEntity){
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();

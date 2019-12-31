@@ -1,6 +1,8 @@
 package services;
 
 
+import services.repositories.AddressRepository;
+import services.repositories.PersonRepository;
 import models.address.Address;
 import models.address.AddressEntity;
 import models.person.Person;
@@ -14,6 +16,8 @@ import java.util.ArrayList;
 @Component("hib")
 public class HibService implements Service {
     private AddressRepository addressRepository;
+
+
 
     @Autowired
     public HibService(AddressRepository addressRepository){
