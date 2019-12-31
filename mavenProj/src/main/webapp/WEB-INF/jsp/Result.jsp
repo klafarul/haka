@@ -9,11 +9,9 @@
 
 
 <body>
-<form action="res" method="get">
+<form action="result" method="get">
     <button>Show Addresses</button>
     <br>
-
-
     <c:forEach items="${addresses}" var="address">
             ${address.toString()}<br>
             <c:forEach items="${address.getPersons()}" var="person">

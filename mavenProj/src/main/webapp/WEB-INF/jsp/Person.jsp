@@ -4,7 +4,7 @@
 <html>
 <body>
 
-<form action="pers" method="post">
+<form action="person" method="post">
     <label>Enter your name</label>
     <input name="name">
     <br>
@@ -30,7 +30,7 @@
     </select>
     <button>Add</button>
 </form>
-<form action="pers" method="get">
+<form action="result" method="post">
     <button>continue</button>
 </form>
 </body>

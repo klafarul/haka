@@ -16,17 +16,17 @@ public class FirstController {
 
 
 
-    @GetMapping("/ind")
+    @GetMapping("/index")
     public String toAddress(){
         return "Address";
     }
 
-    @GetMapping("/addr")
+    @GetMapping("/address")
     public String toPerson(Model model){
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         HibService hibService = context.getBean("hib", HibService.class);
-        //HibService hibService = HibService.getHibService();
+
         ArrayList<Address> list = hibService.findAllAddresses();
         model.addAttribute("list", list);
         System.out.println(list.size() + "SIZEEEEEEEE");
@@ -34,7 +34,7 @@ public class FirstController {
         return "Person";
     }
 
-    @PostMapping("/addr")
+    @PostMapping("/address")
     public String toAddr(@RequestParam(name="city") String city,
                          @RequestParam(name = "house") String house,
                          @RequestParam(name = "apartment") String apartment){
@@ -48,17 +48,12 @@ public class FirstController {
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         HibService hibService = context.getBean("hib", HibService.class);
-//        HibService hibService = HibService.getHibService();
         hibService.saveAddress(address);
         context.close();
         return "Address";
     }
 
-    @GetMapping("/pers")
-    public String toResult(){
-        return "Result";
-    }
-    @PostMapping("/pers")
+    @PostMapping("/person")
     public String addPerson(Model model, @RequestParam(name = "name") String name,
                                          @RequestParam(name = "surname") String surname,
                                          @RequestParam(name = "patronymic") String patronymic,
@@ -66,7 +61,6 @@ public class FirstController {
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         HibService hibService = context.getBean("hib", HibService.class);
-//        HibService hibService = HibService.getHibService();
         Person person = new Person();
         Address address = new Address();
 
@@ -87,26 +81,29 @@ public class FirstController {
 
 
         ArrayList<Address> addresses;
-        addresses = (ArrayList<Address>) hibService.findAllAddresses();
+        addresses =  hibService.findAllAddresses();
         model.addAttribute("list", addresses);
 
         context.close();
         return "Person";
     }
 
-    @GetMapping("/res")
+
+    @PostMapping("/result")
+    public String toResult(){
+        return "Result";
+    }
+    @GetMapping("/result")
     public String showResult(Model model){
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         HibService hibService = context.getBean("hib", HibService.class);
-//        HibService hibService = HibService.getHibService();
         ArrayList<Address> addresses = hibService.findAllAddresses();
 
         model.addAttribute("addresses", addresses);
 
         context.close();
         return "Result";
-
     }
 
 

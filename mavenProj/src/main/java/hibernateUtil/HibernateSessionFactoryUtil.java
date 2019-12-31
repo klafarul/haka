@@ -5,7 +5,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import models.person.PersonEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class HibernateSessionFactoryUtil {
     private static SessionFactory sessionFactory;
 

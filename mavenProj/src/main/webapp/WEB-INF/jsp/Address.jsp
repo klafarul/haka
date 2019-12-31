@@ -1,7 +1,7 @@
 
 <html>
 <body>
-<form action="addr" method="post">
+<form action="address" method="post">
     <label>Enter your City</label>
     <input name="city">
     <br>
@@ -19,7 +19,7 @@
 
     <button type="submit">Add</button>
 </form>
-<form action="addr" method="get">
+<form action="address" method="get">
     <button>continue</button>
 </form>
 </body>
