@@ -1,14 +1,11 @@
-package services;
+package repositories;
 
 import hibernateUtil.HibernateSessionFactoryUtil;
 import models.address.AddressEntity;
-import models.person.Person;
 import models.person.PersonEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
