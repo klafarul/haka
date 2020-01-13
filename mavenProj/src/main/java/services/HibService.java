@@ -1,8 +1,5 @@
 package services;
 
-
-import services.repositories.AddressRepository;
-import services.repositories.PersonRepository;
 import models.address.Address;
 import models.address.AddressEntity;
 import models.person.Person;
@@ -21,7 +18,7 @@ public class HibService implements Service {
 
     @Autowired
     public HibService(AddressRepository addressRepository){
-        this.addressRepository  = addressRepository;
+        this.addressRepository = addressRepository;
     }
     //+++++
     public void savePerson(Person person){
@@ -33,13 +30,10 @@ public class HibService implements Service {
     //+++++
     public void saveAddress(Address address){
         AddressEntity addressEntity = new AddressEntity(address);
-
-
         if (addressRepository.find(addressEntity) == null) {
             addressRepository.save(addressEntity);
         }
     }
-
     //++--
     public void updateAddress(Address address){
 

@@ -3,14 +3,15 @@ package models.address;
 import models.person.Person;
 import models.person.PersonEntity;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 @Entity
 @Table(name = "addresses")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class AddressEntity {
 
     @Id
@@ -25,7 +26,6 @@ public class AddressEntity {
     private int apartment;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressEntity")
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private List<PersonEntity> persons;
 
     public AddressEntity(){

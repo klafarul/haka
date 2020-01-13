@@ -2,7 +2,6 @@ package controllers;
 
 import models.address.Address;
 import models.person.Person;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +11,7 @@ import services.HibService;
 import java.util.ArrayList;
 
 @Controller
-public class FirstController {
+public class MainController {
 
 
 
@@ -55,9 +54,9 @@ public class FirstController {
 
     @PostMapping("/person")
     public String addPerson(Model model, @RequestParam(name = "name") String name,
-                                         @RequestParam(name = "surname") String surname,
-                                         @RequestParam(name = "patronymic") String patronymic,
-                                         @RequestParam(name = "address") String addressLine){
+                            @RequestParam(name = "surname") String surname,
+                            @RequestParam(name = "patronymic") String patronymic,
+                            @RequestParam(name = "address") String addressLine){
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         HibService hibService = context.getBean("hib", HibService.class);

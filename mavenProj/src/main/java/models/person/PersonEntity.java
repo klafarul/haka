@@ -10,7 +10,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "person")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class PersonEntity {
 
     @Id
@@ -33,7 +32,7 @@ public class PersonEntity {
     public PersonEntity(Person person){
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         HibService hibService = context.getBean("hib", HibService.class);
-        //HibService hibService = HibService.getHibService();
+        //services.HibService hibService = services.HibService.getHibService();
 
         this.name = person.getName();
         this.surname = person.getSurname();

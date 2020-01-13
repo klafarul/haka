@@ -1,11 +1,14 @@
-package services.repositories;
+package services;
 
-import hibernateUtil.HibernateSessionFactoryUtil;
+
 import models.address.AddressEntity;
 import models.person.PersonEntity;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,10 +16,27 @@ import java.util.ArrayList;
 @Component
 public class AddressRepository {
 
+    @Autowired
+    SessionFactory sessionFactory;
+
+//    @Autowired
+//    public AddressRepository(SessionFactory sessionFactory){
+//        org.hibernate.cfg.Configuration configuration = new Configuration().configure();
+//        configuration.addAnnotatedClass(AddressEntity.class);
+//        configuration.addAnnotatedClass(PersonEntity.class);
+//        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+//        sessionFactory = configuration.buildSessionFactory(builder.build());
+//        this.sessionFactory = sessionFactory;
+//
+//
+//    }
 
 
     public void save(AddressEntity addressEntity){
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+//        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+
+        Session session = sessionFactory.openSession();
+
         Transaction tx = session.beginTransaction();
         session.save(addressEntity);
         tx.commit();
@@ -24,7 +44,8 @@ public class AddressRepository {
     }
 
     public void update(AddressEntity addressEntity, PersonEntity personEntity){
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+//        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         addressEntity = session.get(AddressEntity.class,addressEntity.getId());
         addressEntity.addPerson(personEntity);
@@ -34,8 +55,8 @@ public class AddressRepository {
     }
 
     public AddressEntity find(AddressEntity addressEntity){
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-
+//        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         String hql = "FROM AddressEntity AE WHERE (AE.city=:city) AND (AE.house=:house) AND (AE.apartment=:apartment)";
         Query query = session.createQuery(hql);
         query.setParameter("city", (String)addressEntity.getCity());
@@ -52,7 +73,8 @@ public class AddressRepository {
     }
 
     public ArrayList<AddressEntity> findAll(){
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+//        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         ArrayList<AddressEntity> addressesEntity = (ArrayList<AddressEntity>) session.createQuery("select distinct  AE FROM AddressEntity AE left JOIN fetch AE.persons order by AE.city", AddressEntity.class).list();
         System.out.println("LOOOOOK HERE: " + addressesEntity.size());
         session.close();
@@ -60,13 +82,10 @@ public class AddressRepository {
     }
 
     public int getId(AddressEntity address){
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+//        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         AddressEntity addressEntity = find(address);
         session.close();
         return addressEntity.getId();
     }
-//    public AddressEntity findById(int id){
-//
-//    }
-
 }

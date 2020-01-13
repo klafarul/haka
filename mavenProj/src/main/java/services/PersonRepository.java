@@ -1,4 +1,4 @@
-package services.repositories;
+package services;
 
 import hibernateUtil.HibernateSessionFactoryUtil;
 import models.person.PersonEntity;

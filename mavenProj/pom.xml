@@ -59,6 +59,8 @@
       <version>5.4.9.Final</version>
     </dependency>
 
+
+    <!--SPRING-->
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -73,12 +75,6 @@
       <version>5.2.2.RELEASE</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>5.2.2.RELEASE</version>
-    </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
     <dependency>
@@ -87,12 +83,14 @@
       <version>5.2.2.RELEASE</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
     <dependency>
       <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
+      <artifactId>spring-orm</artifactId>
       <version>5.2.2.RELEASE</version>
     </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5 -->
     <dependency>
@@ -100,6 +98,7 @@
       <artifactId>thymeleaf-spring5</artifactId>
       <version>3.0.11.RELEASE</version>
     </dependency>
+
 
 
 
