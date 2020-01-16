@@ -27,10 +27,6 @@ public class CommonFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
 
-
-
-
-
         Enumeration<String> params = req.getParameterNames();
 
 
@@ -42,10 +38,6 @@ public class CommonFilter implements Filter {
             this.context.log("Request Params::{" + name + "=" + value + "}");
 
         }
-
-
-
-
         this.context.log( "\nSTATUS::" + httpResponse.getStatus() );
 
         HttpServletResponseCopier wrappedResponse = new HttpServletResponseCopier(httpResponse);

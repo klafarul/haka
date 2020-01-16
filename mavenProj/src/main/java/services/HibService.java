@@ -7,19 +7,23 @@ import models.person.PersonEntity;
 import org.hibernate.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
 @Component("hib")
-public class HibService implements Service {
+public class HibService implements Service{
+
     private AddressRepository addressRepository;
-
-
 
     @Autowired
     public HibService(AddressRepository addressRepository){
         this.addressRepository = addressRepository;
     }
+
+
     //+++++
     public void savePerson(Person person){
         PersonEntity personEntity = new PersonEntity(person);
@@ -39,6 +43,7 @@ public class HibService implements Service {
 
         AddressEntity addressEntity = findByAddress(address);
         PersonEntity personEntity = new PersonEntity(address.getPersons().get(address.getPersons().size()-1));
+
         addressRepository.update(addressEntity, personEntity);
 
     }

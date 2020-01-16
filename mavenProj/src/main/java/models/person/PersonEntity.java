@@ -1,9 +1,13 @@
 package models.person;
 
 
+import models.address.Address;
 import models.address.AddressEntity;
+import org.hibernate.SessionFactory;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import services.HibService;
 
 import javax.persistence.*;
@@ -30,15 +34,9 @@ public class PersonEntity {
     public PersonEntity(){}
 
     public PersonEntity(Person person){
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        HibService hibService = context.getBean("hib", HibService.class);
-        //services.HibService hibService = services.HibService.getHibService();
-
         this.name = person.getName();
         this.surname = person.getSurname();
         this.patronymic = person.getPatronymic();
-        this.addressEntity = hibService.findByAddress(person.getAddress());
-        context.close();
     }
 
     public AddressEntity getAddressEntity() {

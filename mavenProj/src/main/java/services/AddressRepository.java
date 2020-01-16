@@ -6,65 +6,56 @@ import models.person.PersonEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+
 
 import java.util.ArrayList;
 
-@Component
+@Repository
 public class AddressRepository {
 
     @Autowired
-    SessionFactory sessionFactory;
-
-//    @Autowired
-//    public AddressRepository(SessionFactory sessionFactory){
-//        org.hibernate.cfg.Configuration configuration = new Configuration().configure();
-//        configuration.addAnnotatedClass(AddressEntity.class);
-//        configuration.addAnnotatedClass(PersonEntity.class);
-//        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-//        sessionFactory = configuration.buildSessionFactory(builder.build());
-//        this.sessionFactory = sessionFactory;
-//
-//
-//    }
+    private SessionFactory sessionFactory;
 
 
     public void save(AddressEntity addressEntity){
-//        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
 
-        Session session = sessionFactory.openSession();
-
+        Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
+
         session.save(addressEntity);
         tx.commit();
-        session.close();
+//        session.close();
     }
 
     public void update(AddressEntity addressEntity, PersonEntity personEntity){
-//        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Session session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
+
+        Session session = sessionFactory.getCurrentSession();
+
+//        Transaction tx = session.beginTransaction();
         addressEntity = session.get(AddressEntity.class,addressEntity.getId());
         addressEntity.addPerson(personEntity);
         session.merge(addressEntity);
-        tx.commit();
-        session.close();
+//        tx.commit();
+
+
     }
 
     public AddressEntity find(AddressEntity addressEntity){
-//        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Session session = sessionFactory.openSession();
+
+        Session session = sessionFactory.getCurrentSession();
+
         String hql = "FROM AddressEntity AE WHERE (AE.city=:city) AND (AE.house=:house) AND (AE.apartment=:apartment)";
         Query query = session.createQuery(hql);
-        query.setParameter("city", (String)addressEntity.getCity());
+        query.setParameter("city", addressEntity.getCity());
         query.setParameter("house", addressEntity.getHouse());
         query.setParameter("apartment", addressEntity.getApartment());
 
         ArrayList<AddressEntity> addressEntities = (ArrayList<AddressEntity>) query.list();
-        session.close();
+//        session.close();
 
         if (addressEntities.size() > 0){
             return addressEntities.get(0);
@@ -72,17 +63,20 @@ public class AddressRepository {
         return null;
     }
 
+
     public ArrayList<AddressEntity> findAll(){
-//        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Session session = sessionFactory.openSession();
+
+        Session session = sessionFactory.getCurrentSession();
+
         ArrayList<AddressEntity> addressesEntity = (ArrayList<AddressEntity>) session.createQuery("select distinct  AE FROM AddressEntity AE left JOIN fetch AE.persons order by AE.city", AddressEntity.class).list();
         System.out.println("LOOOOOK HERE: " + addressesEntity.size());
-        session.close();
+//        session.close();
+
         return addressesEntity;
     }
 
     public int getId(AddressEntity address){
-//        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+
         Session session = sessionFactory.openSession();
         AddressEntity addressEntity = find(address);
         session.close();
