@@ -4,7 +4,6 @@ import models.address.Address;
 import models.address.AddressEntity;
 import models.person.Person;
 import models.person.PersonEntity;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,14 +51,11 @@ public class HibService {
         addressEntity.setCity(address.getCity());
         addressEntity.setHouse(address.getHouse());
         addressEntity.setApartment(address.getApartment());
-
-
         return addressRepository.find(addressEntity);
     }
 
     //+++++
     public ArrayList<Address> findAllAddresses(){
-
 
         ArrayList<AddressEntity> adressesEntity = addressRepository.findAll();
         ArrayList<Address> addresses= new ArrayList<>();

@@ -20,9 +20,6 @@ public class AddressRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
-
-
-
     public void save(AddressEntity addressEntity){
         Session session = sessionFactory.getCurrentSession();
 
@@ -35,7 +32,6 @@ public class AddressRepository {
 
         addressEntity = session.get(AddressEntity.class,addressEntity.getId());
         addressEntity.addPerson(personEntity);
-        session.merge(addressEntity);
     }
 
     public AddressEntity find(AddressEntity addressEntity){
