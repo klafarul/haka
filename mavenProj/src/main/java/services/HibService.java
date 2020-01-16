@@ -4,20 +4,19 @@ import models.address.Address;
 import models.address.AddressEntity;
 import models.person.Person;
 import models.person.PersonEntity;
-import org.hibernate.service.Service;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.Propagation;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.ArrayList;
 
-@Component("hib")
-public class HibService implements Service{
+@Service("hib")
+@Transactional
+public class HibService {
 
     private AddressRepository addressRepository;
-
     @Autowired
     public HibService(AddressRepository addressRepository){
         this.addressRepository = addressRepository;

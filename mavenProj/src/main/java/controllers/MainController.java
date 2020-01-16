@@ -4,7 +4,6 @@ import models.address.Address;
 import models.person.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import services.HibService;
@@ -12,7 +11,6 @@ import services.HibService;
 import java.util.ArrayList;
 
 @Controller
-@Transactional
 public class MainController {
 
     private HibService hibService;

@@ -21,27 +21,21 @@ public class AddressRepository {
     private SessionFactory sessionFactory;
 
 
-    public void save(AddressEntity addressEntity){
 
+
+    public void save(AddressEntity addressEntity){
         Session session = sessionFactory.getCurrentSession();
-        Transaction tx = session.beginTransaction();
 
         session.save(addressEntity);
-        tx.commit();
-//        session.close();
     }
 
     public void update(AddressEntity addressEntity, PersonEntity personEntity){
 
         Session session = sessionFactory.getCurrentSession();
 
-//        Transaction tx = session.beginTransaction();
         addressEntity = session.get(AddressEntity.class,addressEntity.getId());
         addressEntity.addPerson(personEntity);
         session.merge(addressEntity);
-//        tx.commit();
-
-
     }
 
     public AddressEntity find(AddressEntity addressEntity){
@@ -55,7 +49,6 @@ public class AddressRepository {
         query.setParameter("apartment", addressEntity.getApartment());
 
         ArrayList<AddressEntity> addressEntities = (ArrayList<AddressEntity>) query.list();
-//        session.close();
 
         if (addressEntities.size() > 0){
             return addressEntities.get(0);
@@ -70,7 +63,6 @@ public class AddressRepository {
 
         ArrayList<AddressEntity> addressesEntity = (ArrayList<AddressEntity>) session.createQuery("select distinct  AE FROM AddressEntity AE left JOIN fetch AE.persons order by AE.city", AddressEntity.class).list();
         System.out.println("LOOOOOK HERE: " + addressesEntity.size());
-//        session.close();
 
         return addressesEntity;
     }
