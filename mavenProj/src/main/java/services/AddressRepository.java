@@ -8,22 +8,29 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 
-
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 
-@Repository
+@Component
 public class AddressRepository {
 
     @Autowired
     private SessionFactory sessionFactory;
 
+    @PersistenceContext
+    private EntityManager em;
+
     public void save(AddressEntity addressEntity){
         Session session = sessionFactory.getCurrentSession();
-
         session.save(addressEntity);
+        //em.persist(addressEntity);
+
+
     }
 
     public void update(AddressEntity addressEntity, PersonEntity personEntity){
@@ -57,7 +64,8 @@ public class AddressRepository {
 
         Session session = sessionFactory.getCurrentSession();
 
-        ArrayList<AddressEntity> addressesEntity = (ArrayList<AddressEntity>) session.createQuery("select distinct  AE FROM AddressEntity AE left JOIN fetch AE.persons order by AE.city", AddressEntity.class).list();
+        Query query = (Query) session.createQuery("select distinct  AE FROM AddressEntity AE left JOIN  AE.persons order by AE.city", AddressEntity.class);
+        ArrayList<AddressEntity> addressesEntity = (ArrayList<AddressEntity>)query.list();
         System.out.println("LOOOOOK HERE: " + addressesEntity.size());
 
         return addressesEntity;

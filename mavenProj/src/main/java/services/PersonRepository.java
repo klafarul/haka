@@ -16,10 +16,7 @@ public class PersonRepository {
 
     public void save(PersonEntity personEntity){
         Session session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(personEntity);
-        tx.commit();
-        session.close();
+        session.save(personEntity);;
     }
     public void update(PersonEntity personEntity){
 
