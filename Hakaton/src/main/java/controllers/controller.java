@@ -52,7 +52,7 @@ public class controller {
         Car car = new Car(carPojo);
 
         CarValidation carValidation = new CarValidation();
-        boolean a = carValidation.isCarValid(car, dbService);
+        
         if (carValidation.isCarValid(car, dbService)){
             dbService.saveCar(car);
             return new ResponseEntity<>(null, HttpStatus.OK);
@@ -64,11 +64,21 @@ public class controller {
 
     @RequestMapping(value = "/personWithCars", method = RequestMethod.GET)
     @ResponseBody
-    public PersonWithCarsPojo getPersonInfo(@RequestParam("id") int id){
-        Person person = dbService.getPersonById(id);
-        PersonWithCarsPojo personWithCarsPojo = person.toPersonWithCars();
+    public ResponseEntity<PersonWithCarsPojo> getPersonInfo(@RequestParam("id") int id){
+        if (id > 0){
+            Person person = dbService.getPersonById(id);
+            if (person!= null) {
 
-        return personWithCarsPojo;
+                PersonWithCarsPojo personWithCarsPojo = person.toPersonWithCars();
+
+                return new ResponseEntity<>(personWithCarsPojo, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
+        }
+        else{
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(value = "/statistics", method = RequestMethod.GET)

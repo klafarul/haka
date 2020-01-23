@@ -61,8 +61,12 @@ public class DBService {
 
     public Car getCarById(long id){
         CarEntity carEntity = carRepository.findById(id);
-        Car car = carEntity.toCar();
-        return car;
+        if (carEntity == null){
+            return null;
+        }else {
+            Car car = carEntity.toCar();
+            return car;
+        }
     }
 
     public void deleteAllRaws() {
