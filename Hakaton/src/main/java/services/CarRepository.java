@@ -2,6 +2,7 @@ package services;
 
 
 import models.cars.CarEntity;
+import models.person.PersonEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -37,6 +38,13 @@ public class CarRepository {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("DELETE from CarEntity ");
         query.executeUpdate();
+    }
+
+    public CarEntity findById(long id) {
+        Session session = sessionFactory.getCurrentSession();
+
+        return session.get(CarEntity.class, id);
+
 
     }
 }

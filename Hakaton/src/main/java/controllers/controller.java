@@ -3,6 +3,8 @@ package controllers;
 import models.cars.Car;
 import models.person.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pojo.CarPojo;
@@ -29,7 +31,7 @@ public class controller {
 
     @RequestMapping(value = "/person", method = RequestMethod.POST, headers = {"Content-type=application/json"})
     @ResponseBody
-    public void addPerson(@RequestBody PersonPojo personPojo){
+    public ResponseEntity<?> addPerson(@RequestBody PersonPojo personPojo){
         Person person = new Person(personPojo);
 
         PersonValidation personValidation;
@@ -37,21 +39,27 @@ public class controller {
         personValidation = new PersonValidation();
         if (personValidation.isPersonValid(person, dbService)) {
             dbService.savePerson(person);
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
     @RequestMapping(value = "/car", method = RequestMethod.POST, headers = {"Content-type=application/json"})
-    public void addCar(@RequestBody CarPojo carPojo){
+    public ResponseEntity<?> addCar(@RequestBody CarPojo carPojo){
 
         Car car = new Car(carPojo);
 
         CarValidation carValidation = new CarValidation();
-
+        boolean a = carValidation.isCarValid(car, dbService);
         if (carValidation.isCarValid(car, dbService)){
             dbService.saveCar(car);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
-
-
+        else{
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(value = "/personWithCars", method = RequestMethod.GET)
@@ -59,6 +67,7 @@ public class controller {
     public PersonWithCarsPojo getPersonInfo(@RequestParam("id") int id){
         Person person = dbService.getPersonById(id);
         PersonWithCarsPojo personWithCarsPojo = person.toPersonWithCars();
+
         return personWithCarsPojo;
     }
 

@@ -7,14 +7,14 @@ public class CarValidation {
 
     public boolean isCarValid(Car car, DBService dbService){
 
-        if (isIdValid(car.getId()) && isModelValid(car.getModel()) && isHorsePowerValid(car.getHorsePower()) && isOwnerIdValid(car.getOwnerId(), dbService)){
+        if (isIdValid(car.getId(), dbService) && isModelValid(car.getModel()) && isHorsePowerValid(car.getHorsePower()) && isOwnerIdValid(car.getOwnerId(), dbService)){
             return true;
         }
         return false;
     }
 
-    private boolean isIdValid(long id){
-        if (id > 0){
+    private boolean isIdValid(long id, DBService dbService){
+        if ((id > 0) && (dbService.getCarById(id) == null)){
             return true;
         }
         return false;

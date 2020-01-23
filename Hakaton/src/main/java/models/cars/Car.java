@@ -34,7 +34,6 @@ public class Car {
         CarPojo carPojo = new CarPojo();
 
         carPojo.setId(this.id);
-        carPojo.setVendor(this.vendor);
         carPojo.setModel(this.model);
         carPojo.setHorsePower(this.horsePower);
         carPojo.setOwnerId(this.ownerId);

@@ -57,7 +57,12 @@ public class DBService {
         PersonEntity personEntity = personRepository.findById(id);
         Person person = personEntity.toPerson();
         return person;
+    }
 
+    public Car getCarById(long id){
+        CarEntity carEntity = carRepository.findById(id);
+        Car car = carEntity.toCar();
+        return car;
     }
 
     public void deleteAllRaws() {
@@ -73,7 +78,7 @@ public class DBService {
         return carRepository.getCount();
     }
 
-    //
+
     public long getUniqueVendorCount() {
         return carRepository.getUniqueVendorCount();
     }
