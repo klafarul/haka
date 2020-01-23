@@ -45,9 +45,7 @@ public class DBService {
 
         personEntity.getCars().add(carEntity);
         carEntity.setPersonEntity(personEntity);
-
-        personRepository.update(personEntity);
-//        carRepository.save(carEntity, personEntity);
+        carRepository.save(carEntity);
     }
 
     public int getCountPersonCars(long id){
@@ -55,20 +53,22 @@ public class DBService {
         return personEntity.getCars().size();
     }
 
-//    public void saveCar(){
-//        CarEntity carEntity = new CarEntity();
-//        carEntity.setModel("BMW");
-//        carEntity.setHorsePower(200);
-//
-//        PersonEntity personEntity = new PersonEntity();
-//        personEntity.setBirthDate(12);
-//        personEntity.setName("Maks");
-//        personRepository.saveCar(carEntity, personEntity);
-//
-//    }
+    public Person getPersonById(long id){
+        PersonEntity personEntity = personRepository.findById(id);
+        Person person = personEntity.toPerson();
+        return person;
 
-//    public Person getPerson(int id) {
-//
-//
-//    }
+    }
+
+    public void deleteAllRaws() {
+        personRepository.deleteAll();
+    }
+
+    public long getPersonsCount(){
+       return personRepository.getCount();
+    }
+
+    public long getCarsCount(){
+        return carRepository.getCount();
+    }
 }

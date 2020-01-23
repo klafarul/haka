@@ -15,11 +15,26 @@ public class Car {
 
     private Person person;
 
+    public Car(){
+
+    }
+
     public Car(CarPojo carPojo){
         this.id = carPojo.getId();
         this.model = carPojo.getModel();
         this.horsePower = carPojo.getHorsePower();
         this.ownerId = carPojo.getOwnerId();
+
+    }
+
+    public CarPojo toCarPojo(){
+        CarPojo carPojo = new CarPojo();
+
+        carPojo.setId(this.id);
+        carPojo.setModel(this.model);
+        carPojo.setHorsePower(this.horsePower);
+        carPojo.setOwnerId(this.ownerId);
+        return carPojo;
     }
 
 

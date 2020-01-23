@@ -6,9 +6,6 @@
 
   <display-name>spring-mvc-app1</display-name>
 
-  <welcome-file-list>
-    <welcome-file>jsp/Person.jsp</welcome-file>
-  </welcome-file-list>
 
   <absolute-ordering/>
   <servlet>

@@ -33,6 +33,7 @@ public class CarEntity {
         this.id = car.getId();
         this.model = car.getModel();
         this.horsePower = car.getHorsePower();
+
     }
     public long getId() {
         return id;
@@ -67,5 +68,15 @@ public class CarEntity {
 
     public void setPersonEntity(PersonEntity personEntity) {
         this.personEntity = personEntity;
+    }
+
+    public Car toCar() {
+        Car car = new Car();
+
+        car.setId(this.id);
+        car.setModel(this.model);
+        car.setHorsePower(this.horsePower);
+
+        return car;
     }
 }

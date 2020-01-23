@@ -7,8 +7,11 @@ import models.person.PersonEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+
 
 @Component
 public class PersonRepository {
@@ -40,9 +43,15 @@ public class PersonRepository {
     public void update(PersonEntity personEntity) {
     }
 
-//    public PersonEntity getById(int id){
-//        Session session = sessionFactory.getCurrentSession();
-//
-//
-//    }
+    public void deleteAll() {
+        Session session = sessionFactory.getCurrentSession();
+        session.createQuery("DELETE PersonEntity ");
+
+    }
+
+    public long getCount() {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select PE from PersonEntity PE", PersonEntity.class);
+        return query.list().size();
+    }
 }

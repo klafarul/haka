@@ -1,10 +1,12 @@
 package models.person;
 
 
+import models.cars.Car;
 import models.cars.CarEntity;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -62,5 +64,20 @@ public class PersonEntity {
 
     public void setCars(List<CarEntity> cars) {
         this.cars = cars;
+    }
+
+    public Person toPerson() {
+        Person person = new Person();
+        person.setId(this.id);
+        person.setName(this.name);
+        person.setBirthDate(this.getBirthDate());
+
+        List<Car> carList = new ArrayList<>();
+        for (int i = 0; i < this.getCars().size(); i++){
+            carList.add(this.cars.get(i).toCar());
+        }
+        person.setCars(carList);
+
+        return person;
     }
 }

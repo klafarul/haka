@@ -29,7 +29,7 @@
     </select>
     <button>Add</button>
 </form>
-<form action="result" method="post">
+<form action="infoPerson" method="get">
     <button>continue</button>
 </form>
 </body>
