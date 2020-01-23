@@ -26,4 +26,17 @@ public class CarRepository {
         Query query = session.createQuery("select CE from CarEntity CE", CarEntity.class);
         return query.list().size();
     }
+
+    public long getUniqueVendorCount() {
+        Session session =sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select distinct vendor from CarEntity ");
+        return query.list().size();
+    }
+
+    public void deleteAll() {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("DELETE from CarEntity ");
+        query.executeUpdate();
+
+    }
 }

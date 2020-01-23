@@ -61,6 +61,7 @@ public class DBService {
     }
 
     public void deleteAllRaws() {
+        carRepository.deleteAll();
         personRepository.deleteAll();
     }
 
@@ -70,5 +71,10 @@ public class DBService {
 
     public long getCarsCount(){
         return carRepository.getCount();
+    }
+
+    //
+    public long getUniqueVendorCount() {
+        return carRepository.getUniqueVendorCount();
     }
 }

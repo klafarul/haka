@@ -36,7 +36,7 @@ public class CarValidation {
 
     private boolean isOwnerIdValid(long ownerId, DBService dbService){
 
-        if (!dbService.isPersonInDb(ownerId)){
+        if (dbService.isPersonInDb(ownerId)){
             return true;
         }
         return false;

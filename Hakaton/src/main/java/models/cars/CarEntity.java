@@ -2,6 +2,8 @@ package models.cars;
 
 
 import models.person.PersonEntity;
+import org.hibernate.annotations.Columns;
+import org.hibernate.annotations.Type;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -14,11 +16,18 @@ public class CarEntity {
     @Id
     private long id;
 
-    @Column(name = "model")
-    private String model;
+//    @Column(name = "model")
+//    private String model;
 
     @Column(name = "horsepower")
     private int horsePower;
+
+    @Column(name = "vendor")
+    private String vendor;
+
+    @Column(name = "model")
+    private String model;
+
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "ownerId")
@@ -31,6 +40,7 @@ public class CarEntity {
 
     public CarEntity(Car car){
         this.id = car.getId();
+        this.vendor = car.getVendor();
         this.model = car.getModel();
         this.horsePower = car.getHorsePower();
 
@@ -41,6 +51,14 @@ public class CarEntity {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
     }
 
     public String getModel() {
@@ -59,9 +77,6 @@ public class CarEntity {
         this.horsePower = horsePower;
     }
 
-
-
-
     public PersonEntity getPersonEntity() {
         return personEntity;
     }
@@ -74,8 +89,10 @@ public class CarEntity {
         Car car = new Car();
 
         car.setId(this.id);
+        car.setVendor(this.vendor);
         car.setModel(this.model);
         car.setHorsePower(this.horsePower);
+        car.setOwnerId(this.personEntity.getId());
 
         return car;
     }

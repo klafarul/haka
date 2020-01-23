@@ -4,6 +4,8 @@ public class CarPojo {
 
     private long id;
 
+    private String vendor;
+
     private String model;
 
     private int horsePower;
@@ -16,6 +18,14 @@ public class CarPojo {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
     }
 
     public String getModel() {

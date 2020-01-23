@@ -6,6 +6,8 @@ public class StatisticsPojo {
 
     private long carCount;
 
+    private long uniqueVendorCount;
+
     public long getPersonCount() {
         return personCount;
     }
@@ -20,5 +22,13 @@ public class StatisticsPojo {
 
     public void setCarCount(long carCount) {
         this.carCount = carCount;
+    }
+
+    public long getUniqueVendorCount() {
+        return uniqueVendorCount;
+    }
+
+    public void setUniqueVendorCount(long uniqueVendorCount) {
+        this.uniqueVendorCount = uniqueVendorCount;
     }
 }
