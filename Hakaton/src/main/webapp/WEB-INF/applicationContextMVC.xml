@@ -41,7 +41,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="annotatedClasses">
             <list>
                 <value>models.person.PersonEntity</value>
-                <value>validation.CarValidation</value>
+                <value>services.CarValidationService</value>
             </list>
         </property>
     </bean>

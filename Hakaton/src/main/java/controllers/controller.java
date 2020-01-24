@@ -12,8 +12,8 @@ import pojo.PersonPojo;
 import pojo.PersonWithCarsPojo;
 import pojo.StatisticsPojo;
 import services.DBService;
-import validation.CarValidation;
-import validation.PersonValidation;
+import services.CarValidationService;
+import services.PersonValidationService;
 
 @RestController
 public class controller {
@@ -22,10 +22,10 @@ public class controller {
     private DBService dbService;
 
     @Autowired
-    private CarValidation carValidation;
+    private CarValidationService carValidation;
 
     @Autowired
-    private PersonValidation personValidation;
+    private PersonValidationService personValidation;
 
     @RequestMapping("/")
     public ModelAndView startPage(){
@@ -55,7 +55,6 @@ public class controller {
 
         Car car = new Car(carPojo);
 
-//        CarValidation carValidation = new CarValidation();
 
         if (carValidation.isCarValid(car)){
             dbService.saveCar(car);

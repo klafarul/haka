@@ -1,15 +1,25 @@
-package validation;
+package services;
 
 import models.car.Car;
+import models.person.PersonEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import repositories.CarRepository;
+import repositories.PersonRepository;
 import services.DBService;
 
-@Component
-public class CarValidation {
+@Service
+@Transactional
+public class CarValidationService {
+
 
     @Autowired
-    private DBService dbService;
+    private CarRepository carRepository;
+
+    @Autowired
+    private PersonRepository personRepository;
 
     public boolean isCarValid(Car car){
 
@@ -20,7 +30,7 @@ public class CarValidation {
     }
 
     private boolean isIdValid(long id){
-        if ((id > 0) && (dbService.getCarById(id) == null)){
+        if ((id > 0) && (carRepository.findById(id) == null)){
             return true;
         }
         return false;
@@ -49,7 +59,9 @@ public class CarValidation {
 
     private boolean isOwnerIdValid(long ownerId){
 
-        if (dbService.isPersonInDb(ownerId)){
+        PersonEntity personEntity  = personRepository.findById(ownerId);
+
+        if (personEntity != null) {
             return true;
         }
         return false;

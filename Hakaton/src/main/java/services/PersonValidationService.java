@@ -1,20 +1,24 @@
-package validation;
+package services;
 
 import models.person.Person;
+import models.person.PersonEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import repositories.PersonRepository;
 import services.DBService;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-
-@Component
-public class PersonValidation {
+@Service
+@Transactional
+public class PersonValidationService {
 
     @Autowired
-    private DBService dbService;
+    private PersonRepository personRepository;
 
 
 
@@ -48,7 +52,9 @@ public class PersonValidation {
 
 
     private boolean isIdValid(long id){
-        if (dbService.isPersonInDb(id) == false){
+        PersonEntity personEntity = personRepository.findById(id);
+
+        if (personEntity == null){
             return true;
         }
         return false;
