@@ -1,8 +1,7 @@
-package services;
+package repositories;
 
 
-import models.cars.CarEntity;
-import models.person.PersonEntity;
+import models.car.CarEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -19,7 +18,6 @@ public class CarRepository {
     public void save(CarEntity carEntity){
         Session session = sessionFactory.getCurrentSession();
         session.save(carEntity);
-
     }
 
     public long getCount() {

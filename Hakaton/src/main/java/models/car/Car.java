@@ -1,4 +1,4 @@
-package models.cars;
+package models.car;
 
 import models.person.Person;
 import pojo.CarPojo;
@@ -23,8 +23,8 @@ public class Car {
 
     public Car(CarPojo carPojo){
         this.id = carPojo.getId();
-        this.vendor = carPojo.getModel().substring(0, carPojo.getModel().indexOf(' '));
-        this.model = carPojo.getModel().substring(carPojo.getModel().indexOf(' '));
+        this.vendor = carPojo.getModel().substring(0, carPojo.getModel().indexOf('-'));
+        this.model = carPojo.getModel().substring(carPojo.getModel().indexOf('-') + 1);
         this.horsePower = carPojo.getHorsePower();
         this.ownerId = carPojo.getOwnerId();
 
@@ -34,7 +34,7 @@ public class Car {
         CarPojo carPojo = new CarPojo();
 
         carPojo.setId(this.id);
-        carPojo.setModel(this.model);
+        carPojo.setModel(this.vendor.trim() + "-" + this.model.trim());
         carPojo.setHorsePower(this.horsePower);
         carPojo.setOwnerId(this.ownerId);
         return carPojo;

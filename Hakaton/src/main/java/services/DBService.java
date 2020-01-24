@@ -1,13 +1,15 @@
 package services;
 
 
-import models.cars.Car;
-import models.cars.CarEntity;
+import models.car.Car;
+import models.car.CarEntity;
 import models.person.Person;
 import models.person.PersonEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import repositories.CarRepository;
+import repositories.PersonRepository;
 
 @Service
 @Transactional

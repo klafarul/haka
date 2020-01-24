@@ -1,9 +1,7 @@
-package models.cars;
+package models.car;
 
 
 import models.person.PersonEntity;
-import org.hibernate.annotations.Columns;
-import org.hibernate.annotations.Type;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;

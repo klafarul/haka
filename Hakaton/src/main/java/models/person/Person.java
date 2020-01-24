@@ -1,6 +1,6 @@
 package models.person;
 
-import models.cars.Car;
+import models.car.Car;
 import pojo.CarPojo;
 import pojo.PersonPojo;
 import pojo.PersonWithCarsPojo;
@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Person {
 
@@ -29,17 +30,21 @@ public class Person {
         this.id = personPojo.getId();
         this.name = personPojo.getName();
         try {
-            birthDate = new SimpleDateFormat("dd.MM.yy").parse(personPojo.getDate());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+            birthDate = dateFormat.parse(personPojo.getDate());
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        String a ="";
     }
 
     public PersonWithCarsPojo toPersonWithCars(){
         PersonWithCarsPojo personWithCarsPojo = new PersonWithCarsPojo();
         personWithCarsPojo.setId(this.id);
         personWithCarsPojo.setName(this.name);
-        personWithCarsPojo.setDate(this.birthDate.toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        personWithCarsPojo.setDate(dateFormat.format(this.birthDate));
 
         List<CarPojo> carsPojo = new ArrayList<>();
 

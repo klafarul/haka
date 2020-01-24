@@ -1,8 +1,6 @@
 package validation;
 
 import models.person.Person;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import services.DBService;
 
 import java.util.Calendar;

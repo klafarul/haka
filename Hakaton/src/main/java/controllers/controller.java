@@ -1,6 +1,6 @@
 package controllers;
 
-import models.cars.Car;
+import models.car.Car;
 import models.person.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,7 +52,7 @@ public class controller {
         Car car = new Car(carPojo);
 
         CarValidation carValidation = new CarValidation();
-        
+
         if (carValidation.isCarValid(car, dbService)){
             dbService.saveCar(car);
             return new ResponseEntity<>(null, HttpStatus.OK);

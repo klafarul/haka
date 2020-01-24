@@ -1,8 +1,8 @@
 package models.person;
 
 
-import models.cars.Car;
-import models.cars.CarEntity;
+import models.car.Car;
+import models.car.CarEntity;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
