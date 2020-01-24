@@ -21,6 +21,12 @@ public class controller {
     @Autowired
     private DBService dbService;
 
+    @Autowired
+    private CarValidation carValidation;
+
+    @Autowired
+    private PersonValidation personValidation;
+
     @RequestMapping("/")
     public ModelAndView startPage(){
         ModelAndView modelAndView = new ModelAndView();
@@ -34,10 +40,8 @@ public class controller {
     public ResponseEntity<?> addPerson(@RequestBody PersonPojo personPojo){
         Person person = new Person(personPojo);
 
-        PersonValidation personValidation;
 
-        personValidation = new PersonValidation();
-        if (personValidation.isPersonValid(person, dbService)) {
+        if (personValidation.isPersonValid(person)) {
             dbService.savePerson(person);
             return new ResponseEntity<>(null, HttpStatus.OK);
         }
@@ -51,9 +55,9 @@ public class controller {
 
         Car car = new Car(carPojo);
 
-        CarValidation carValidation = new CarValidation();
+//        CarValidation carValidation = new CarValidation();
 
-        if (carValidation.isCarValid(car, dbService)){
+        if (carValidation.isCarValid(car)){
             dbService.saveCar(car);
             return new ResponseEntity<>(null, HttpStatus.OK);
         }

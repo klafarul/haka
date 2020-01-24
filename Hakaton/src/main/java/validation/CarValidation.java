@@ -1,19 +1,25 @@
 package validation;
 
 import models.car.Car;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import services.DBService;
 
+@Component
 public class CarValidation {
 
-    public boolean isCarValid(Car car, DBService dbService){
+    @Autowired
+    private DBService dbService;
 
-        if (isIdValid(car.getId(), dbService) && isVendorValid(car.getVendor()) && isModelValid(car.getModel()) && isHorsePowerValid(car.getHorsePower()) && isOwnerIdValid(car.getOwnerId(), dbService)){
+    public boolean isCarValid(Car car){
+
+        if (isIdValid(car.getId()) && isVendorValid(car.getVendor()) && isModelValid(car.getModel()) && isHorsePowerValid(car.getHorsePower()) && isOwnerIdValid(car.getOwnerId())){
             return true;
         }
         return false;
     }
 
-    private boolean isIdValid(long id, DBService dbService){
+    private boolean isIdValid(long id){
         if ((id > 0) && (dbService.getCarById(id) == null)){
             return true;
         }
@@ -41,7 +47,7 @@ public class CarValidation {
         return false;
     }
 
-    private boolean isOwnerIdValid(long ownerId, DBService dbService){
+    private boolean isOwnerIdValid(long ownerId){
 
         if (dbService.isPersonInDb(ownerId)){
             return true;

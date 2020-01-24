@@ -13,6 +13,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <mvc:annotation-driven/>
     <context:component-scan base-package="controllers" />
     <context:component-scan base-package="services"/>
+    <context:component-scan base-package="validation"/>
     <context:component-scan base-package="repositories"/>
 
 
@@ -40,6 +41,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="annotatedClasses">
             <list>
                 <value>models.person.PersonEntity</value>
+                <value>validation.CarValidation</value>
             </list>
         </property>
     </bean>
