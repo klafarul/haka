@@ -32,7 +32,12 @@ public class Person {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
-            birthDate = dateFormat.parse(personPojo.getDate());
+            if(personPojo.getBirthdate()!=null) {
+                birthDate = dateFormat.parse(personPojo.getBirthdate());
+            }
+            else{
+                birthDate = null;
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -44,7 +49,7 @@ public class Person {
         personWithCarsPojo.setId(this.id);
         personWithCarsPojo.setName(this.name);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        personWithCarsPojo.setDate(dateFormat.format(this.birthDate));
+        personWithCarsPojo.setBirthdate(dateFormat.format(this.birthDate));
 
         List<CarPojo> carsPojo = new ArrayList<>();
 

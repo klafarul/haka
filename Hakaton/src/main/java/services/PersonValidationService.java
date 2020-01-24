@@ -20,8 +20,6 @@ public class PersonValidationService {
     @Autowired
     private PersonRepository personRepository;
 
-
-
     public boolean isPersonValid(Person person){
         if (isNameValid(person.getName()) && isBirthDateVaild(person.getBirthDate()) && isIdValid(person.getId())){
             return true;
@@ -38,13 +36,17 @@ public class PersonValidationService {
     }
 
     private boolean isBirthDateVaild(Date birthDate){
+        if (birthDate != null){
+            Calendar currentDate = new GregorianCalendar();
+            Calendar birthDateCalendar = new GregorianCalendar();
+            birthDateCalendar.setTime(birthDate);
+            boolean fl = birthDateCalendar.before(currentDate);
 
-        Calendar currentDate = new GregorianCalendar();
-        Calendar birthDateCalendar = new GregorianCalendar();
-        birthDateCalendar.setTime(birthDate);
 
-        if (birthDateCalendar.before(currentDate) && (currentDate.getWeekYear() - birthDateCalendar.getWeekYear() >= 18)){
-            return true;
+
+            if (birthDateCalendar.before(currentDate)){
+                return true;
+            }
         }
 
         return false;
@@ -54,7 +56,7 @@ public class PersonValidationService {
     private boolean isIdValid(long id){
         PersonEntity personEntity = personRepository.findById(id);
 
-        if (personEntity == null){
+        if ((personEntity == null) && (id!=0)){
             return true;
         }
         return false;

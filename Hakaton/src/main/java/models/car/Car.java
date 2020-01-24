@@ -23,9 +23,14 @@ public class Car {
 
     public Car(CarPojo carPojo){
         this.id = carPojo.getId();
-        this.vendor = carPojo.getModel().substring(0, carPojo.getModel().indexOf('-'));
-        this.model = carPojo.getModel().substring(carPojo.getModel().indexOf('-') + 1);
-        this.horsePower = carPojo.getHorsePower();
+        if (carPojo.getModel() != "" && carPojo.getModel() != null) {
+            this.vendor = carPojo.getModel().substring(0, carPojo.getModel().indexOf('-'));
+            this.model = carPojo.getModel().substring(carPojo.getModel().indexOf('-') + 1);
+        }else{
+            this.model = null;
+            this.vendor = null;
+        }
+        this.horsePower = carPojo.getHorsepower();
         this.ownerId = carPojo.getOwnerId();
 
     }
@@ -35,7 +40,7 @@ public class Car {
 
         carPojo.setId(this.id);
         carPojo.setModel(this.vendor.trim() + "-" + this.model.trim());
-        carPojo.setHorsePower(this.horsePower);
+        carPojo.setHorsepower(this.horsePower);
         carPojo.setOwnerId(this.ownerId);
         return carPojo;
     }

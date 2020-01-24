@@ -8,7 +8,7 @@ public class PersonWithCarsPojo {
 
     private String name;
 
-    private String date;
+    private String birthdate;
 
     List<CarPojo> cars;
 
@@ -30,12 +30,12 @@ public class PersonWithCarsPojo {
         this.name = name;
     }
 
-    public String getDate() {
-        return date;
+    public String getBirthdate() {
+        return birthdate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
     }
 
     public List<CarPojo> getCars() {

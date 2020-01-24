@@ -48,6 +48,7 @@ public class PersonRepository {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select PE from PersonEntity PE", PersonEntity.class);
 
+
         return query.list().size();
     }
 }

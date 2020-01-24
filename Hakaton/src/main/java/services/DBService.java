@@ -57,7 +57,10 @@ public class DBService {
 
     public Person getPersonById(long id){
         PersonEntity personEntity = personRepository.findById(id);
-        Person person = personEntity.toPerson();
+        Person person = null;
+        if (personEntity!=null) {
+            person = personEntity.toPerson();
+        }
         return person;
     }
 

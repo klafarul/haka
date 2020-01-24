@@ -65,10 +65,10 @@ public class controller {
         }
     }
 
-    @RequestMapping(value = "/personWithCars", method = RequestMethod.GET)
+    @RequestMapping(value = "/personwithcars", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<PersonWithCarsPojo> getPersonInfo(@RequestParam("id") int id){
-        if (id > 0){
+    public ResponseEntity<PersonWithCarsPojo> getPersonInfo(@RequestParam("personid") int id){
+
             Person person = dbService.getPersonById(id);
             if (person!= null) {
 
@@ -78,19 +78,15 @@ public class controller {
             }else{
                 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             }
-        }
-        else{
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
     }
 
     @RequestMapping(value = "/statistics", method = RequestMethod.GET)
     @ResponseBody
     public StatisticsPojo getStatistics(){
         StatisticsPojo statisticsPojo = new StatisticsPojo();
-        statisticsPojo.setPersonCount(dbService.getPersonsCount());
-        statisticsPojo.setCarCount(dbService.getCarsCount());
-        statisticsPojo.setUniqueVendorCount(dbService.getUniqueVendorCount());
+        statisticsPojo.setPersoncount(dbService.getPersonsCount());
+        statisticsPojo.setCarcount(dbService.getCarsCount());
+        statisticsPojo.setUniquevendorcount(dbService.getUniqueVendorCount());
         return statisticsPojo;
     }
 

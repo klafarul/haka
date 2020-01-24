@@ -6,7 +6,7 @@ public class CarPojo {
 
     private String model;
 
-    private int horsePower;
+    private int horsepower;
 
     private long ownerId;
 
@@ -26,12 +26,13 @@ public class CarPojo {
         this.model = model;
     }
 
-    public int getHorsePower() {
-        return horsePower;
+    public int getHorsepower() {
+        return horsepower;
     }
 
-    public void setHorsePower(int horsePower) {
-        this.horsePower = horsePower;
+
+    public void setHorsepower(int horsePower) {
+        this.horsepower = horsePower;
     }
 
     public long getOwnerId() {

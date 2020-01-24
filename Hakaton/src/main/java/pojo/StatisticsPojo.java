@@ -2,33 +2,33 @@ package pojo;
 
 public class StatisticsPojo {
 
-    private long personCount;
+    private long personcount;
 
-    private long carCount;
+    private long carcount;
 
-    private long uniqueVendorCount;
+    private long uniquevendorcount;
 
-    public long getPersonCount() {
-        return personCount;
+    public long getPersoncount() {
+        return personcount;
     }
 
-    public void setPersonCount(long personCount) {
-        this.personCount = personCount;
+    public void setPersoncount(long personcount) {
+        this.personcount = personcount;
     }
 
-    public long getCarCount() {
-        return carCount;
+    public long getCarcount() {
+        return carcount;
     }
 
-    public void setCarCount(long carCount) {
-        this.carCount = carCount;
+    public void setCarcount(long carcount) {
+        this.carcount = carcount;
     }
 
-    public long getUniqueVendorCount() {
-        return uniqueVendorCount;
+    public long getUniquevendorcount() {
+        return uniquevendorcount;
     }
 
-    public void setUniqueVendorCount(long uniqueVendorCount) {
-        this.uniqueVendorCount = uniqueVendorCount;
+    public void setUniquevendorcount(long uniquevendorcount) {
+        this.uniquevendorcount = uniquevendorcount;
     }
 }
