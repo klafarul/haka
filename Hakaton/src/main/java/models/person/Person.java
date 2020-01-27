@@ -1,5 +1,6 @@
 package models.person;
 
+import jdk.nashorn.internal.runtime.ParserException;
 import models.car.Car;
 import pojo.CarPojo;
 import pojo.PersonPojo;
@@ -7,10 +8,9 @@ import pojo.PersonWithCarsPojo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
+
+import static java.util.Calendar.YEAR;
 
 public class Person {
 
@@ -33,7 +33,13 @@ public class Person {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
             if(personPojo.getBirthdate()!=null) {
+                Calendar calendar = new GregorianCalendar();
                 birthDate = dateFormat.parse(personPojo.getBirthdate());
+                calendar.setLenient(false);
+
+
+
+
             }
             else{
                 birthDate = null;
@@ -41,7 +47,6 @@ public class Person {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String a ="";
     }
 
     public PersonWithCarsPojo toPersonWithCars(){

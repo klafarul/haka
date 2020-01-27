@@ -23,11 +23,14 @@ public class Car {
 
     public Car(CarPojo carPojo){
         this.id = carPojo.getId();
-        if (carPojo.getModel() != "" && carPojo.getModel() != null) {
+        if ( (carPojo.getModel() != null) && (carPojo.getModel() != "") ) {
             this.vendor = carPojo.getModel().substring(0, carPojo.getModel().indexOf('-'));
             this.model = carPojo.getModel().substring(carPojo.getModel().indexOf('-') + 1);
         }else{
             this.model = null;
+            this.vendor = null;
+        }
+        if ((this.vendor != null) && (this.vendor.equals(""))){
             this.vendor = null;
         }
         this.horsePower = carPojo.getHorsepower();

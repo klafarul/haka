@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import repositories.CarRepository;
 import repositories.PersonRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Transactional
 public class DBService {

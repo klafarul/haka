@@ -41,7 +41,7 @@ public class controller {
         Person person = new Person(personPojo);
 
 
-        if (personValidation.isPersonValid(person)) {
+        if (personValidation.isPersonValid(person, personPojo.getBirthdate())) {
             dbService.savePerson(person);
             return new ResponseEntity<>(null, HttpStatus.OK);
         }

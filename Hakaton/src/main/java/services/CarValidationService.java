@@ -48,7 +48,7 @@ public class CarValidationService {
     }
 
     private boolean isVendorValid(String vendor){
-        if ((vendor != null) && (!vendor.contains("-"))){
+        if ((vendor != null) && (!vendor.contains("-") && (vendor != ""))){
             return true;
         }
         return false;

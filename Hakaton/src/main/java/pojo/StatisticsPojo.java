@@ -30,5 +30,6 @@ public class StatisticsPojo {
 
     public void setUniquevendorcount(long uniquevendorcount) {
         this.uniquevendorcount = uniquevendorcount;
+        //
     }
 }

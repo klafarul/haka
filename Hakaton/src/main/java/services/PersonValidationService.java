@@ -20,8 +20,8 @@ public class PersonValidationService {
     @Autowired
     private PersonRepository personRepository;
 
-    public boolean isPersonValid(Person person){
-        if (isNameValid(person.getName()) && isBirthDateVaild(person.getBirthDate()) && isIdValid(person.getId())){
+    public boolean isPersonValid(Person person, String enteredDate){
+        if (isNameValid(person.getName()) && isBirthDateVaild(person.getBirthDate(), enteredDate) && isIdValid(person.getId())){
             return true;
         }
         return false;
@@ -35,16 +35,28 @@ public class PersonValidationService {
         return false;
     }
 
-    private boolean isBirthDateVaild(Date birthDate){
+    private boolean isBirthDateVaild(Date birthDate, String enteredDate){
         if (birthDate != null){
-            Calendar currentDate = new GregorianCalendar();
+            Calendar currentDateCalendar = new GregorianCalendar();
             Calendar birthDateCalendar = new GregorianCalendar();
+            //birthDateCalendar.setLenient(false);
             birthDateCalendar.setTime(birthDate);
-            boolean fl = birthDateCalendar.before(currentDate);
+
+            int a = birthDateCalendar.get(Calendar.MONTH);
+
+            int enteredDays = Integer.parseInt(enteredDate.substring(0, enteredDate.indexOf(".")));
+            int enteredMonth = Integer.parseInt(enteredDate.substring(enteredDate.indexOf(".") + 1, enteredDate.lastIndexOf(".")));
+            int enteredYear = Integer.parseInt(enteredDate.substring(enteredDate.lastIndexOf(".") + 1));
+
+            if (birthDateCalendar.get(Calendar.DAY_OF_MONTH)   != enteredDays  ||
+                birthDateCalendar.get(Calendar.MONTH) + 1      != enteredMonth ||
+                birthDateCalendar.get(Calendar.YEAR)           != enteredYear){
+                return false;
+            }
 
 
-
-            if (birthDateCalendar.before(currentDate)){
+            boolean fl = birthDateCalendar.before(currentDateCalendar);
+            if (birthDateCalendar.before(currentDateCalendar)){
                 return true;
             }
         }

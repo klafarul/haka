@@ -8,6 +8,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class CarRepository {
 
@@ -28,7 +30,7 @@ public class CarRepository {
 
     public long getUniqueVendorCount() {
         Session session =sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select distinct vendor from CarEntity ");
+        Query query = session.createQuery("select distinct upper(vendor) from CarEntity ");
         return query.list().size();
     }
 
