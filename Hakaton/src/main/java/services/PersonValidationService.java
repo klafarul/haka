@@ -20,8 +20,8 @@ public class PersonValidationService {
     @Autowired
     private PersonRepository personRepository;
 
-    public boolean isPersonValid(Person person, String enteredDate){
-        if (isNameValid(person.getName()) && isBirthDateVaild(person.getBirthDate(), enteredDate) && isIdValid(person.getId())){
+    public boolean isPersonValid(Person person, String enteredDateFromPojo){
+        if (isNameValid(person.getName()) && isBirthDateVaild(person.getBirthDate(), enteredDateFromPojo) && isIdValid(person.getId())){
             return true;
         }
         return false;
@@ -35,18 +35,17 @@ public class PersonValidationService {
         return false;
     }
 
-    private boolean isBirthDateVaild(Date birthDate, String enteredDate){
+    private boolean isBirthDateVaild(Date birthDate, String enteredDateFromPojo){
         if (birthDate != null){
             Calendar currentDateCalendar = new GregorianCalendar();
             Calendar birthDateCalendar = new GregorianCalendar();
-            //birthDateCalendar.setLenient(false);
             birthDateCalendar.setTime(birthDate);
 
             int a = birthDateCalendar.get(Calendar.MONTH);
 
-            int enteredDays = Integer.parseInt(enteredDate.substring(0, enteredDate.indexOf(".")));
-            int enteredMonth = Integer.parseInt(enteredDate.substring(enteredDate.indexOf(".") + 1, enteredDate.lastIndexOf(".")));
-            int enteredYear = Integer.parseInt(enteredDate.substring(enteredDate.lastIndexOf(".") + 1));
+            int enteredDays = Integer.parseInt(enteredDateFromPojo.substring(0, enteredDateFromPojo.indexOf(".")));
+            int enteredMonth = Integer.parseInt(enteredDateFromPojo.substring(enteredDateFromPojo.indexOf(".") + 1, enteredDateFromPojo.lastIndexOf(".")));
+            int enteredYear = Integer.parseInt(enteredDateFromPojo.substring(enteredDateFromPojo.lastIndexOf(".") + 1));
 
             if (birthDateCalendar.get(Calendar.DAY_OF_MONTH)   != enteredDays  ||
                 birthDateCalendar.get(Calendar.MONTH) + 1      != enteredMonth ||

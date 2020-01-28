@@ -8,8 +8,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
-
 @Component
 public class PersonRepository {
 
@@ -32,22 +30,17 @@ public class PersonRepository {
 
     public PersonEntity findById(long id) {
         Session session = sessionFactory.getCurrentSession();
-
         return session.get(PersonEntity.class, id);
-
-
     }
 
     public void deleteAll() {
         Session session = sessionFactory.getCurrentSession();
         session.createQuery("DELETE  from PersonEntity ").executeUpdate();
-
     }
 
     public long getCount() {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select PE from PersonEntity PE", PersonEntity.class);
-
 
         return query.list().size();
     }

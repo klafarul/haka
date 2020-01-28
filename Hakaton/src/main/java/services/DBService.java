@@ -47,6 +47,9 @@ public class DBService {
     public void saveCar(Car car){
         CarEntity carEntity = new CarEntity(car);
         PersonEntity personEntity = personRepository.findById(car.getOwnerId());
+        if (personEntity.getCars() == null){
+            personEntity.setCars(new ArrayList<CarEntity>());
+        }
 
         personEntity.getCars().add(carEntity);
         carEntity.setPersonEntity(personEntity);
@@ -60,7 +63,11 @@ public class DBService {
 
     public Person getPersonById(long id){
         PersonEntity personEntity = personRepository.findById(id);
+        if (personEntity.getCars() == null){
+            personEntity.setCars(new ArrayList<CarEntity>());
+        }
         Person person = null;
+
         if (personEntity!=null) {
             person = personEntity.toPerson();
         }
@@ -69,12 +76,12 @@ public class DBService {
 
     public Car getCarById(long id){
         CarEntity carEntity = carRepository.findById(id);
-        if (carEntity == null){
-            return null;
-        }else {
-            Car car = carEntity.toCar();
-            return car;
+
+        Car car = null;
+        if (carEntity != null){
+            car = carEntity.toCar();
         }
+        return car;
     }
 
     public void deleteAllRaws() {

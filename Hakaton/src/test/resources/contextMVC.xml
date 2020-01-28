@@ -46,11 +46,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/perscars"/>
-        <property name="username" value="postgres"/>
-        <property name="password" value="1234"/>
-
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:mem:db;DB_CLOSE_DELAY=-1"/>
     </bean>
 
     <bean id="txManager"
