@@ -36,10 +36,6 @@ public class Person {
                 Calendar calendar = new GregorianCalendar();
                 birthDate = dateFormat.parse(personPojo.getBirthdate());
                 calendar.setLenient(false);
-
-
-
-
             }
             else{
                 birthDate = null;

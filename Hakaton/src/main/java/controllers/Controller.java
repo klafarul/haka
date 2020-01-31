@@ -16,7 +16,7 @@ import services.CarValidationService;
 import services.PersonValidationService;
 
 @RestController
-public class controller {
+public class Controller {
 
     @Autowired
     private DBService dbService;

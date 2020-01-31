@@ -29,9 +29,11 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
         <property name="hibernateProperties">
             <props>
-
                 <prop key="hibernate.dialect">
-                    org.hibernate.dialect.PostgreSQL9Dialect
+                    org.hibernate.dialect.H2Dialect
+                </prop>
+                <prop key="hibernate.hbm2ddl.auto">
+                    create-drop
                 </prop>
             </props>
 
@@ -47,7 +49,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:mem:db;DB_CLOSE_DELAY=-1"/>
+        <property name="url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+        <property name="username" value="sa"/>
     </bean>
 
     <bean id="txManager"

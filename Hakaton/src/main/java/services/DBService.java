@@ -63,7 +63,7 @@ public class DBService {
 
     public Person getPersonById(long id){
         PersonEntity personEntity = personRepository.findById(id);
-        if (personEntity.getCars() == null){
+        if (personEntity != null && personEntity.getCars() == null ){
             personEntity.setCars(new ArrayList<CarEntity>());
         }
         Person person = null;
