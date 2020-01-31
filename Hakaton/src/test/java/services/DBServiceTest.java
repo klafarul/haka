@@ -47,7 +47,7 @@ public class DBServiceTest {
 
     @Test
     public void TestIsPersonInDb_returnFalse_BadId(){
-        when(personRepository.findById(2)).thenReturn(new PersonEntity());
+        when(personRepository.findById(3)).thenReturn(new PersonEntity());
         assertFalse(dbService.isPersonInDb(1));
         verify(personRepository).findById(any(Long.class));
     }

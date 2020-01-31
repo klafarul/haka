@@ -50,7 +50,6 @@ public class TestDBServiceMockMVC {
         mockMvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isBadRequest());
 
-//        mockMvc.perform(get("/statistics")).andExpect(status().isOk()).andExpect((ResultMatcher) jsonPath("$.personcount").value(2));
     }
 
     @Test
@@ -65,7 +64,6 @@ public class TestDBServiceMockMVC {
         mockMvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isBadRequest());
 
-//        mockMvc.perform(get("/statistics")).andExpect(status().isOk()).andExpect((ResultMatcher) jsonPath("$.personcount").value(2));
     }
 
     @Test
@@ -79,7 +77,6 @@ public class TestDBServiceMockMVC {
         mockMvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isBadRequest());
 
-//        mockMvc.perform(get("/statistics")).andExpect(status().isOk()).andExpect((ResultMatcher) jsonPath("$.personcount").value(2));
     }
 
     @Test
@@ -93,7 +90,6 @@ public class TestDBServiceMockMVC {
         mockMvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isBadRequest());
 
-//        mockMvc.perform(get("/statistics")).andExpect(status().isOk()).andExpect((ResultMatcher) jsonPath("$.personcount").value(2));
     }
 
     @Test
@@ -108,13 +104,12 @@ public class TestDBServiceMockMVC {
         mockMvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isBadRequest());
 
-//        mockMvc.perform(get("/statistics")).andExpect(status().isOk()).andExpect((ResultMatcher) jsonPath("$.personcount").value(2));
     }
 
     @Test
     public void testAddBadCarEmptyNullModel() throws Exception{
         PersonPojo personPojo = new PersonPojo();
-        personPojo.setId(-100);
+        personPojo.setId(-310);
         personPojo.setName("Mask");
         personPojo.setBirthdate("12.12.1998");
 
@@ -141,7 +136,7 @@ public class TestDBServiceMockMVC {
         jsonCar = gson.toJson(carPojo);
         mockMvc.perform(post("/car").contentType(MediaType.APPLICATION_JSON).content(jsonCar))
                 .andExpect(status().isBadRequest());
-//        mockMvc.perform(get("/statistics")).andExpect(status().isOk()).andExpect((ResultMatcher) jsonPath("$.personcount").value(2));
+
     }
 
     @Test
@@ -174,7 +169,6 @@ public class TestDBServiceMockMVC {
         jsonCar = gson.toJson(carPojo);
         mockMvc.perform(post("/car").contentType(MediaType.APPLICATION_JSON).content(jsonCar))
                 .andExpect(status().isBadRequest());
-//        mockMvc.perform(get("/statistics")).andExpect(status().isOk()).andExpect((ResultMatcher) jsonPath("$.personcount").value(2));
     }
 
     @Test
@@ -208,7 +202,6 @@ public class TestDBServiceMockMVC {
         jsonCar = gson.toJson(carPojo);
         mockMvc.perform(post("/car").contentType(MediaType.APPLICATION_JSON).content(jsonCar))
                 .andExpect(status().isOk());
-//        mockMvc.perform(get("/statistics")).andExpect(status().isOk()).andExpect((ResultMatcher) jsonPath("$.personcount").value(2));
 
         mockMvc.perform(get("/statistics")).andExpect(status().isOk()).andExpect(jsonPath("$.personcount").value(1));
         mockMvc.perform(get("/statistics")).andExpect(status().isOk()).andExpect(jsonPath("$.carcount").value(2));
@@ -218,7 +211,7 @@ public class TestDBServiceMockMVC {
     @Test
     public void testClear() throws Exception {
         PersonPojo personPojo = new PersonPojo();
-        personPojo.setId(-100);
+        personPojo.setId(-300);
         personPojo.setName("Mask");
         personPojo.setBirthdate("12.12.1998");
 
